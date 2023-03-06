@@ -7,8 +7,10 @@ using UnityEngine;
 public class Chunk : MonoBehaviour
 {
     public int size = 256;
+    public bool autoGenerate = true;
     public NoiseMap noiseMap;
     public Gradient gradient;
+
 
     public Renderer rend;
 
@@ -42,7 +44,7 @@ public class Chunk : MonoBehaviour
         {
             for (int y = 0; y < size; y++)
             {
-                float sample = noiseMap.Noise(x, y, size);
+                float sample = noiseMap.Noise(x, y);
                 Color color = gradient.Evaluate(sample);
                 //Color color = new Color(sample, sample, sample);
                 texture.SetPixel(x, y, color);

@@ -6,11 +6,16 @@ using UnityEngine;
 [CustomEditor (typeof(Chunk))]
 public class EditorMapGeneration : Editor
 {
+
     public override void OnInspectorGUI()
     {
         Chunk chunk = (Chunk)target;
 
-        if (DrawDefaultInspector ()) {
+        if (DrawDefaultInspector () && chunk.autoGenerate) {
+            chunk.GenerateMap();
+        }
+
+        if (GUILayout.Button ("Generate")) {
             chunk.GenerateMap();
         }
 
