@@ -10,7 +10,7 @@ public class NoiseMap
     public float persistence;
     public float lacunarity;
 
-    public float Noise(int x, int y) {
+    public float Noise(float x, float y) {
         if (scale == 0) {
             scale = 0.0001f;
         }
@@ -22,8 +22,8 @@ public class NoiseMap
         float noiseHeight = 0;
 
         for (int i = 0; i < octaves; i++) {
-            float xCoord = (float)x / scale * frequency;
             float yCoord = (float)y / scale * frequency;
+            float xCoord = (float)x / scale * frequency;
 
             sample = Mathf.PerlinNoise(xCoord, yCoord) * 2 - 1;
             noiseHeight += sample * amplitude;

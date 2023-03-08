@@ -12,11 +12,11 @@ public class EditorMapGeneration : Editor
         Chunk chunk = (Chunk)target;
 
         if (DrawDefaultInspector () && chunk.autoGenerate) {
-            chunk.GenerateMap();
+            chunk.RenderMap();
         }
 
         if (GUILayout.Button ("Generate")) {
-            chunk.GenerateMap();
+            chunk.RenderMap();
         }
 
         if (GUILayout.Button ("Save .PNG")) {

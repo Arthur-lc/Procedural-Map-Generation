@@ -10,6 +10,7 @@ public class Chunk : MonoBehaviour
     public bool autoGenerate = true;
     public NoiseMap noiseMap;
     public Gradient gradient;
+    public Vector2 offset;
 
 
     public Renderer rend;
@@ -20,9 +21,10 @@ public class Chunk : MonoBehaviour
     void Start()
     {
         rend = GetComponent<Renderer>();
+        rend.material = new Material(rend.material);
     }
 
-    public void GenerateMap()
+    public void RenderMap()
     {
         rend.sharedMaterial.mainTexture = GenerateTexture();
     }
@@ -36,15 +38,24 @@ public class Chunk : MonoBehaviour
         Debug.Log(_bytes.Length/1024  + "Kb was saved as: " + path);
     }
 
+    private void Update() {
+        if (autoGenerate) {
+            offset.x = this.transform.position.x / this.transform.localScale.x * size;
+            offset.y = this.transform.position.y / this.transform.localScale.y * size;
+            RenderMap();
+        }
+    }
+
     Texture2D GenerateTexture()
     {
         Texture2D texture = new Texture2D(size, size);
+        texture.filterMode = FilterMode.Point;
 
         for (int x = 0; x < size; x++)
         {
             for (int y = 0; y < size; y++)
             {
-                float sample = noiseMap.Noise(x, y);
+                float sample = noiseMap.Noise(offset.x + x, offset.y + y);
                 Color color = gradient.Evaluate(sample);
                 //Color color = new Color(sample, sample, sample);
                 texture.SetPixel(x, y, color);
