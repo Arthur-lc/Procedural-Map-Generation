@@ -5,8 +5,7 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
-
-Recordings
+Assets/Record/
 
 # Visual Studio cache directory
 .vscode/
