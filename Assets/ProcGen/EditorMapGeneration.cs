@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
 
 [CustomEditor (typeof(Chunk))]
 public class EditorMapGeneration : Editor
@@ -24,3 +25,5 @@ public class EditorMapGeneration : Editor
         }
     }
 }
+
+#endif

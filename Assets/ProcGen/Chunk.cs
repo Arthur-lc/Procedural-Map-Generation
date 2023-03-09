@@ -10,6 +10,7 @@ public class Chunk : MonoBehaviour
     public bool autoGenerate = true;
     public NoiseMap noiseMap;
     public Gradient gradient;
+    public float seaLevel;
     public Vector2 offset;
 
 
