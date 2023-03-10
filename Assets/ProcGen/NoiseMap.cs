@@ -22,13 +22,13 @@ public class NoiseMap
         float noiseHeight = 0;
 
         for (int i = 0; i < octaves; i++) {
-            float yCoord = (float)y / scale * frequency;
-            float xCoord = (float)x / scale * frequency;
+            float yCoord = scale * frequency * (float)y;
+            float xCoord = scale * frequency * (float)x;
 
             sample = Mathf.PerlinNoise(xCoord, yCoord) * 2 - 1;
             noiseHeight += sample * amplitude;
 
-            amplitude *= persistence;
+            amplitude /= persistence;
             frequency *= lacunarity;
         }
 

@@ -15,7 +15,7 @@ public class NoiseManager : MonoBehaviour {
         noiseMap = chunk.noiseMap;
 
         scaleSlider.value = noiseMap.scale;
-        resolutionSlider.value = chunk.size;
+        resolutionSlider.value = chunk.resolution;
         octavesSlider.value = noiseMap.octaves;
         persistenceSlider.value = noiseMap.persistence;
         lacunaritySlider.value = noiseMap.lacunarity;
@@ -31,7 +31,7 @@ public class NoiseManager : MonoBehaviour {
     }
 
     public void serResolution() {
-        chunk.size = (int)resolutionSlider.value;
+        chunk.resolution = (int)resolutionSlider.value;
         chunk.RenderMap();
     }
 

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Chunk : MonoBehaviour
 {
-    public int size = 256;
+    public int resolution = 256;
     public bool autoGenerate = true;
     public NoiseMap noiseMap;
     public Gradient gradient;
@@ -41,25 +41,27 @@ public class Chunk : MonoBehaviour
 
     private void Update() {
         if (autoGenerate) {
-            offset.x = this.transform.position.x / this.transform.localScale.x * size;
-            offset.y = this.transform.position.y / this.transform.localScale.y * size;
+            offset.x = this.transform.position.x / this.transform.localScale.x * resolution;
+            offset.y = this.transform.position.y / this.transform.localScale.y * resolution;
             RenderMap();
         }
     }
 
     Texture2D GenerateTexture()
     {
-        Texture2D texture = new Texture2D(size, size);
+        Texture2D texture = new Texture2D(resolution, resolution);
         texture.filterMode = FilterMode.Point;
 
-        for (int x = 0; x < size; x++)
+        for (int i = 0; i < resolution; i++)
         {
-            for (int y = 0; y < size; y++)
+            for (int j = 0; j < resolution; j++)
             {
-                float sample = noiseMap.Noise(offset.x + x, offset.y + y);
+                float x = offset.x + (float)i / resolution;
+                float y = offset.x + (float)j / resolution;
+                float sample = noiseMap.Noise(x, y);
                 Color color = gradient.Evaluate(sample);
                 //Color color = new Color(sample, sample, sample);
-                texture.SetPixel(x, y, color);
+                texture.SetPixel(i, j, color);
             }
         }
 
